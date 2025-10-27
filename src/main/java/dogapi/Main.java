@@ -6,13 +6,14 @@ public class Main {
 
     public static void main(String[] args) {
         String breed = "hound";
-        BreedFetcher breedFetcher = new CachingBreedFetcher(new BreedFetcherForLocalTesting());
+        CachingBreedFetcher breedFetcher = new CachingBreedFetcher(new DogApiBreedFetcher());
         int result = getNumberOfSubBreeds(breed, breedFetcher);
         System.out.println(breed + " has " + result + " sub breeds");
 
         breed = "cat";
         result = getNumberOfSubBreeds(breed, breedFetcher);
         System.out.println(breed + " has " + result + " sub breeds");
+        System.out.println("Total API calls made: " + breedFetcher.getCallsMade());
     }
 
     /**
@@ -24,8 +25,12 @@ public class Main {
      * returned by the fetcher
      */
     public static int getNumberOfSubBreeds(String breed, BreedFetcher breedFetcher) {
-        // TODO Task 3 implement this code so that it is entirely consistent with its provided documentation.
-        // return statement included so that the starter code can compile and run.
-        return -1;
+        try {
+            List<String> subBreeds = breedFetcher.getSubBreeds(breed);
+            return subBreeds.size();
+        } catch (BreedFetcher.BreedNotFoundException e) {
+            //according to readme returns 0
+            return 0;
+        }
     }
 }
