@@ -29,8 +29,7 @@ public class DogApiBreedFetcher implements BreedFetcher {
 
         // request api action?
         Request request = new Request.Builder()
-                .url(url)
-                .build();
+                .url(url).build();
 
         try (Response response = client.newCall(request).execute()) {
             // check HTTP response
