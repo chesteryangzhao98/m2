@@ -6,14 +6,15 @@ public class Main {
 
     public static void main(String[] args) {
         String breed = "hound";
-        CachingBreedFetcher breedFetcher = new CachingBreedFetcher(new DogApiBreedFetcher());
+        BreedFetcher breedFetcher = new CachingBreedFetcher(new DogApiBreedFetcher());
+
         int result = getNumberOfSubBreeds(breed, breedFetcher);
         System.out.println(breed + " has " + result + " sub breeds");
 
         breed = "cat";
         result = getNumberOfSubBreeds(breed, breedFetcher);
         System.out.println(breed + " has " + result + " sub breeds");
-        System.out.println("Total API calls made: " + breedFetcher.getCallsMade());
+
     }
 
     /**
