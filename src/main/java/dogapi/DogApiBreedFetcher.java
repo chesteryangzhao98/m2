@@ -38,12 +38,12 @@ public class DogApiBreedFetcher implements BreedFetcher {
                 throw new BreedNotFoundException("HTTP error: " + response.code());
             }
 
-            // analyse Json response
+            // analyse Json responses
             assert response.body() != null;
             String responseBody = response.body().string();
             JSONObject json = new JSONObject(responseBody);
 
-            // check api response
+            // check api responses
             String status = json.getString("status");
             if ("error".equals(status)) {
                 throw new BreedNotFoundException(breed);
